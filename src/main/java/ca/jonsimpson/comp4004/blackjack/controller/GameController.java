@@ -3,19 +3,28 @@ package ca.jonsimpson.comp4004.blackjack.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.jonsimpson.comp4004.blackjack.Blackjack;
 import ca.jonsimpson.comp4004.blackjack.Player;
 import ca.jonsimpson.comp4004.blackjack.PlayerDoesntExistException;
 import ca.jonsimpson.comp4004.blackjack.PlayerManager;
 
+@Controller
 @RequestMapping("/game")
 public class GameController {
 	
 	@Autowired
 	private Blackjack game;
+	
+	@Autowired
+	private PlayerManager playerManager;
 	
 	/**
 	 * The player gets one more card. If the card causes the sum of their cards
@@ -40,19 +49,29 @@ public class GameController {
 	 * @throws PlayerDoesntExistException
 	 */
 	@RequestMapping("stay")
-	public String stay(@RequestBody String id) throws PlayerDoesntExistException {
+	public String stay(@RequestParam String id) throws PlayerDoesntExistException {
 		getGame().stay(getPlayer(id));
 		return null;
 	}
 	
 	@RequestMapping(method = GET)
-	public String getStatus() {
+	public String getStatus(Model model) {
+		
 		getGame().getStatus();
-		return null;
+		model.addAttribute("name", "bob");
+		return "status";
 	}
 	
+	@RequestMapping("new")
+	public ResponseEntity<String> newPlayer() {
+		String newId = playerManager.newPlayer();
+		
+		return new ResponseEntity<String>(newId, HttpStatus.CREATED);
+	}
+	
+	
 	private Player getPlayer(String id) throws PlayerDoesntExistException {
-		return PlayerManager.getPlayer(id);
+		return playerManager.getPlayer(id);
 	}
 	
 	public Blackjack getGame() {

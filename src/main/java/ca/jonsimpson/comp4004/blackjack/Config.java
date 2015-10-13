@@ -14,4 +14,10 @@ public class Config {
 		log.debug("created blackjack bean");
 		return new Blackjack();
 	}
+	
+	@Bean
+	public PlayerManager getPlayerManager() {
+		log.debug("created player manager");
+		return new PlayerManager();
+	}
 }
