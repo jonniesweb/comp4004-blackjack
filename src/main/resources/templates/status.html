@@ -1,10 +1,26 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Blackjack</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p th:text="'Hello, ' + ${name} + '!'" />
+	<p>Current number of players: <span th:text="${playerCount}">100</span></p>
+    <p th:switch="${status}">Status: 
+    	<span th:case="'waiting'">Waiting for another player to go</span>
+    	<span th:case="go">It is your turn</span>
+    	<span th:case="*">Unknown status</span>
+    </p>
+    <div>
+    	<form th:action="@{hit}" method="get">
+    		<input th:type="hidden" th:name="id" th:value="${id}"/>
+			<input type="submit" th:value="Hit"/>
+		</form>
+    	
+    	<form th:action="@{stay}" method="get">
+    		<input th:type="hidden" th:name="id" th:value="${id}"/>
+			<input type="submit" th:value="Stay"/>
+		</form>
+    </div>
 </body>
 </html>
