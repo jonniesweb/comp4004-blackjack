@@ -7,11 +7,11 @@ import java.util.Random;
 public class PlayerManager {
 	private Map<String, Player> players = new HashMap<String, Player>();
 
-	public Player getPlayer(String id) throws PlayerDoesntExistException {
+	public Player getPlayer(String id) throws UnknownPlayerException {
 		Player player = players.get(id);
 		
 		if (player == null) {
-			throw new PlayerDoesntExistException();
+			throw new UnknownPlayerException();
 		}
 		
 		return player;

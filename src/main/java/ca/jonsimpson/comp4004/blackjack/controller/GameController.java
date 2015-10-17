@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.jonsimpson.comp4004.blackjack.Blackjack;
 import ca.jonsimpson.comp4004.blackjack.Player;
-import ca.jonsimpson.comp4004.blackjack.PlayerDoesntExistException;
+import ca.jonsimpson.comp4004.blackjack.UnknownPlayerException;
 
 @Controller
 @RequestMapping("/game")
@@ -26,10 +26,10 @@ public class GameController {
 	 * 
 	 * @param id
 	 * @return
-	 * @throws PlayerDoesntExistException
+	 * @throws UnknownPlayerException
 	 */
 	@RequestMapping(value = "hit", method = POST)
-	public String hit(Model model, @RequestParam String id) throws PlayerDoesntExistException {
+	public String hit(Model model, @RequestParam String id) throws UnknownPlayerException {
 		getGame().hit(getPlayer(id));
 		model.addAttribute("id", id);
 		return doRedirect(id);
@@ -41,17 +41,17 @@ public class GameController {
 	 * 
 	 * @param id
 	 * @return
-	 * @throws PlayerDoesntExistException
+	 * @throws UnknownPlayerException
 	 */
 	@RequestMapping(value = "stay", method = POST)
-	public String stay(Model model, @RequestParam String id) throws PlayerDoesntExistException {
+	public String stay(Model model, @RequestParam String id) throws UnknownPlayerException {
 		getGame().stay(getPlayer(id));
 		model.addAttribute("id", id);
 		return doRedirect(id);
 	}
 	
 	@RequestMapping(method = GET)
-	public String getStatus(Model model, @RequestParam String id) throws PlayerDoesntExistException {
+	public String getStatus(Model model, @RequestParam String id) throws UnknownPlayerException {
 		
 		model.addAttribute("id", id);
 		model.addAttribute("status", getGame().getStatus(getPlayer(id)));
@@ -74,7 +74,7 @@ public class GameController {
 	}
 	
 	
-	private Player getPlayer(String id) throws PlayerDoesntExistException {
+	private Player getPlayer(String id) throws UnknownPlayerException {
 		return game.getPlayerManager().getPlayer(id);
 	}
 	
