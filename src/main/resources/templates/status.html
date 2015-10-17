@@ -3,6 +3,8 @@
 <head>
     <title>Blackjack</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" 
+          href="../../css/gtvg.css" th:href="@{/style.css}" />
 </head>
 <body>
 	<p>Current number of players: <span th:text="${blackjack.playerManager.size}">100</span></p>
@@ -25,8 +27,8 @@
     </div>
         
     <p>Your Cards:</p>
-    <div th:each="card : ${playerCards}" style="display: inline-block;">
-    	<div th:class="card" style="display: default;">
+    <div th:each="card : ${playerCards}" id="player-cards">
+    	<div class="card">
 			<span th:text="${card.rank}">card rank</span><br/>
 			<span th:text="${card.suit}">card suit</span>
 		</div>

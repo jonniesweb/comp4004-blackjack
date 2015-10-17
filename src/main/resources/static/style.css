@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+#action-buttons form {
+	display: inline-block;
+}
+
+#player-cards {
+	display: inline-block;
+}
+
+#player-cards.div {
+	display: default;
+}
