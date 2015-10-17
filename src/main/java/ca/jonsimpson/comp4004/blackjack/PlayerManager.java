@@ -31,5 +31,8 @@ public class PlayerManager {
 		return id;
 	}
 	
+	public int getSize() {
+		return players.size();
+	}
 	
 }

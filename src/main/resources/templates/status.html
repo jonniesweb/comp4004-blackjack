@@ -5,19 +5,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<p>Current number of players: <span th:text="${playerCount}">100</span></p>
+	<p>Current number of players: <span th:text="${blackjack.playerManager.size}">100</span></p>
     <p th:switch="${status}">Status: 
     	<span th:case="'waiting'">Waiting for another player to go</span>
     	<span th:case="go">It is your turn</span>
     	<span th:case="*">Unknown status</span>
     </p>
     <div>
-    	<form th:action="@{hit}" method="get">
+    	<form th:action="@{hit}" method="post">
     		<input th:type="hidden" th:name="id" th:value="${id}"/>
 			<input type="submit" th:value="Hit"/>
 		</form>
     	
-    	<form th:action="@{stay}" method="get">
+    	<form th:action="@{stay}" method="post">
     		<input th:type="hidden" th:name="id" th:value="${id}"/>
 			<input type="submit" th:value="Stay"/>
 		</form>
