@@ -11,7 +11,8 @@
     	<span th:case="go">It is your turn</span>
     	<span th:case="*">Unknown status</span>
     </p>
-    <div>
+    
+    <div th:id="action-buttons">
     	<form th:action="@{hit}" method="post">
     		<input th:type="hidden" th:name="id" th:value="${id}"/>
 			<input type="submit" th:value="Hit"/>
@@ -21,6 +22,14 @@
     		<input th:type="hidden" th:name="id" th:value="${id}"/>
 			<input type="submit" th:value="Stay"/>
 		</form>
+    </div>
+        
+    <p>Your Cards:</p>
+    <div th:each="card : ${playerCards}" style="display: inline-block;">
+    	<div th:class="card" style="display: default;">
+			<span th:text="${card.rank}">card rank</span><br/>
+			<span th:text="${card.suit}">card suit</span>
+		</div>
     </div>
 </body>
 </html>

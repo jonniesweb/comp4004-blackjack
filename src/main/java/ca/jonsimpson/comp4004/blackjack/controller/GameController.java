@@ -52,10 +52,12 @@ public class GameController {
 	
 	@RequestMapping(method = GET)
 	public String getStatus(Model model, @RequestParam String id) throws UnknownPlayerException {
+		Player player = getPlayer(id);
 		
 		model.addAttribute("id", id);
-		model.addAttribute("status", getGame().getStatus(getPlayer(id)));
+		model.addAttribute("status", getGame().getStatus(player));
 		model.addAttribute(game);
+		model.addAttribute("playerCards", player.getCards());
 		
 		return "status";
 	}
