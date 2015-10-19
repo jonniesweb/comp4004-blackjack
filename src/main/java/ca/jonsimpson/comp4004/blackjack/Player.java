@@ -19,5 +19,9 @@ public class Player {
 	public List<Card> getCards() {
 		return cards;
 	}
+
+	public void clearCards() {
+		cards = new ArrayList<Card>();
+	}
 	
 }

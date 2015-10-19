@@ -1,11 +1,11 @@
 package ca.jonsimpson.comp4004.blackjack;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class PlayerManager {
-	private Map<String, Player> players = new HashMap<String, Player>();
+	private HashMap<String, Player> players = new HashMap<String, Player>();
 
 	public Player getPlayer(String id) throws UnknownPlayerException {
 		Player player = players.get(id);
@@ -33,6 +33,10 @@ public class PlayerManager {
 	
 	public int getSize() {
 		return players.size();
+	}
+
+	public Collection<Player> getAllPlayers() {
+		return players.values();
 	}
 	
 }

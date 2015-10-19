@@ -44,4 +44,20 @@ public class Blackjack {
 		return playerManager;
 	}
 	
+	private void resetDeck() {
+		deck = CardDeck.fullDeck();
+	}
+	
+	/**
+	 * Remove all the cards from every player and reset the deck to a full 52
+	 * cards.
+	 */
+	public void newGame() {
+		resetDeck();
+		
+		for (Player player : getPlayerManager().getAllPlayers()) {
+			player.clearCards();
+		}
+	}
+	
 }
