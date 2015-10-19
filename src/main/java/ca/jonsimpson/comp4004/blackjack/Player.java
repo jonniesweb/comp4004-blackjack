@@ -24,4 +24,13 @@ public class Player {
 		cards = new ArrayList<Card>();
 	}
 	
+	public int getCardTotal() {
+		int total = 0;
+		for (Card card : cards) {
+			total += card.getValue();
+		}
+		
+		return total;
+	}
+	
 }

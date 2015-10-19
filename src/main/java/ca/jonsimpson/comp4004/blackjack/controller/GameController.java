@@ -57,7 +57,7 @@ public class GameController {
 		model.addAttribute("id", id);
 		model.addAttribute("status", getGame().getStatus(player));
 		model.addAttribute(game);
-		model.addAttribute("playerCards", player.getCards());
+		model.addAttribute("player", player);
 		
 		return "status";
 	}

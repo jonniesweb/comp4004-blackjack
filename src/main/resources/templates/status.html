@@ -26,8 +26,8 @@
 		</form>
     </div>
         
-    <p>Your Cards:</p>
-    <div th:each="card : ${playerCards}" id="player-cards">
+    <p>Your Cards: <span th:text="${player.cardTotal}"></span></p>
+    <div th:each="card : ${player.cards}" id="player-cards">
     	<div class="card">
 			<span th:text="${card.rank}">card rank</span><br/>
 			<span th:text="${card.suit}">card suit</span>
