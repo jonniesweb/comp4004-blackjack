@@ -33,4 +33,8 @@ public class Player {
 		return total;
 	}
 	
+	public boolean isBust() {
+		return getCardTotal() > 21;
+	}
+	
 }
