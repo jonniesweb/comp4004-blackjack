@@ -36,8 +36,7 @@ public class Blackjack {
 	 * @return
 	 */
 	private boolean waitingFor(Player player) {
-		// TODO Auto-generated method stub
-		return false;
+		return true; // TODO: implement state machine then change this
 	}
 	
 	public PlayerManager getPlayerManager() {
