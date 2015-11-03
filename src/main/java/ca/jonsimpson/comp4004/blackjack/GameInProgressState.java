@@ -22,6 +22,13 @@ public class GameInProgressState extends State {
 		// set the first player to go
 		currentPlayer = playerOrder.get(0);
 		
+		// give two cards to each player
+		for (int i = 0; i < 2; i++) {
+			for (Player player : playerOrder) {
+				doHit(player);
+			}
+		}
+		
 	}
 	
 	private void nextPlayer() {
@@ -52,10 +59,19 @@ public class GameInProgressState extends State {
 		checkNotBusted(player);
 		checkNotStay(player);
 		
+		doHit(player);
+		
+	}
+	
+	/**
+	 * Actually give the player a card. Sets the next player after completed.
+	 * 
+	 * @param player
+	 */
+	private void doHit(Player player) {
 		player.addCard(getBlackjack().takeCard());
 		
 		nextPlayer();
-		
 	}
 	
 	public void stay(Player player) throws InvalidStateException {
