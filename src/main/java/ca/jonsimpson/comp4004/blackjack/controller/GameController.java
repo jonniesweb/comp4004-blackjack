@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.jonsimpson.comp4004.blackjack.Blackjack;
+import ca.jonsimpson.comp4004.blackjack.InvalidStateException;
 import ca.jonsimpson.comp4004.blackjack.Player;
 import ca.jonsimpson.comp4004.blackjack.UnknownPlayerException;
 
@@ -27,9 +28,10 @@ public class GameController {
 	 * @param id
 	 * @return
 	 * @throws UnknownPlayerException
+	 * @throws InvalidStateException 
 	 */
 	@RequestMapping(value = "hit", method = POST)
-	public String hit(Model model, @RequestParam String id) throws UnknownPlayerException {
+	public String hit(Model model, @RequestParam String id) throws UnknownPlayerException, InvalidStateException {
 		getGame().hit(getPlayer(id));
 		model.addAttribute("id", id);
 		return doRedirect(id);
@@ -42,9 +44,10 @@ public class GameController {
 	 * @param id
 	 * @return
 	 * @throws UnknownPlayerException
+	 * @throws InvalidStateException 
 	 */
 	@RequestMapping(value = "stay", method = POST)
-	public String stay(Model model, @RequestParam String id) throws UnknownPlayerException {
+	public String stay(Model model, @RequestParam String id) throws UnknownPlayerException, InvalidStateException {
 		getGame().stay(getPlayer(id));
 		model.addAttribute("id", id);
 		return doRedirect(id);
@@ -64,7 +67,12 @@ public class GameController {
 	
 	@RequestMapping("new")
 	public String newPlayer(Model model) {
-		String newId = game.getPlayerManager().newPlayer();
+		String newId = game.newPlayer();
+		
+		// tell the user that they have to wait for a new game to start
+		if (newId == null) {
+			return "game-in-progress";
+		}
 		
 		model.addAttribute("id", newId);
 		

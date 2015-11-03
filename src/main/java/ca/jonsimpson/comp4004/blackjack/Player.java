@@ -6,7 +6,8 @@ import java.util.List;
 public class Player {
 	
 	private final String id;
-	List<Card> cards = new ArrayList<Card>();
+	private List<Card> cards = new ArrayList<Card>();
+	private boolean stay = false;
 	
 	public Player(String id) {
 		this.id = id;
@@ -20,7 +21,7 @@ public class Player {
 		return cards;
 	}
 
-	public void clearCards() {
+	private void clearCards() {
 		cards = new ArrayList<Card>();
 	}
 	
@@ -36,5 +37,17 @@ public class Player {
 	public boolean isBust() {
 		return getCardTotal() > 21;
 	}
+
+	public void stay() {
+		stay = true;
+	}
 	
+	public void reset() {
+		stay = false;
+		clearCards();
+	}
+
+	public boolean isStay() {
+		return stay;
+	}
 }

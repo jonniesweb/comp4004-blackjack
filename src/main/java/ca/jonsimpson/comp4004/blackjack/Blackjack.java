@@ -10,13 +10,22 @@ public class Blackjack {
 	@Autowired
 	private PlayerManager playerManager;
 	
+	private State state;
+	
+	// the game's deck of cards to pull from
 	private CardDeck deck = CardDeck.fullDeck();
 	
-	public void hit(Player player) {
-		player.addCard(deck.takeCard());
+	public Blackjack() {
+		state = new PlayerJoinState(this);
 	}
 	
-	public void stay(Player player) {
+	public void hit(Player player) throws InvalidStateException {
+		state.hit(player);
+		
+	}
+	
+	public void stay(Player player) throws InvalidStateException {
+		state.stay(player);
 		
 	}
 	
@@ -36,7 +45,14 @@ public class Blackjack {
 	 * @return
 	 */
 	private boolean waitingFor(Player player) {
-		return true; // TODO: implement state machine then change this
+		try {
+			return player.equals(state.getWaitingForPlayer());
+		} catch (InvalidStateException e) {
+			e.printStackTrace();
+		}
+		
+		// return false if the state is invalid
+		return false;
 	}
 	
 	public PlayerManager getPlayerManager() {
@@ -55,8 +71,24 @@ public class Blackjack {
 		resetDeck();
 		
 		for (Player player : getPlayerManager().getAllPlayers()) {
-			player.clearCards();
+			player.reset();
 		}
+	}
+	
+	public Card takeCard() {
+		return deck.takeCard();
+	}
+	
+	public String newPlayer() {
+		try {
+			return state.newPlayer();
+			
+		} catch (InvalidStateException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
 	}
 	
 }
