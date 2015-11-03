@@ -89,5 +89,5 @@ public class GameInProgressState extends State {
 			throw new InvalidStateException("player is bust");
 		}
 	}
-
+	
 }

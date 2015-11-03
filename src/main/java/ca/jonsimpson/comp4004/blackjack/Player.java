@@ -1,6 +1,7 @@
 package ca.jonsimpson.comp4004.blackjack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Player {
@@ -51,4 +52,17 @@ public class Player {
 		return stay;
 	}
 	
+	/**
+	 * Get the list of cards viewable by others
+	 * @return
+	 */
+	public List<Card> getPublicCards() {
+		
+		if (cards.size() > 1) {
+			return cards.subList(1, cards.size());
+			
+		} else {
+			return Collections.EMPTY_LIST;
+		}
+	}
 }

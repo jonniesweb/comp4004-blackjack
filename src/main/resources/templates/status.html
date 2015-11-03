@@ -40,5 +40,15 @@
 			<span th:text="${card.suit}">card suit</span>
 		</div>
     </div>
+    
+    <p>Other player's cards</p>
+	<div th:each="p : ${blackjack.playerManager.allPlayers}">
+		<div th:each="card : ${p.publicCards}" id="player-cards" th:unless="${player == p}">
+	    	<div class="card">
+	    		<span th:text="${card.rank}">card rank</span><br/>
+				<span th:text="${card.suit}">card suit</span>
+			</div>
+		</div>
+    </div>
 </body>
 </html>
