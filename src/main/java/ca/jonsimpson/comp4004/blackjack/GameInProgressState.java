@@ -24,7 +24,7 @@ public class GameInProgressState extends State {
 		
 	}
 	
-	public void nextPlayer() {
+	private void nextPlayer() {
 		// get the current index
 		int index = playerOrder.indexOf(currentPlayer);
 		
@@ -54,6 +54,8 @@ public class GameInProgressState extends State {
 		
 		player.addCard(getBlackjack().takeCard());
 		
+		nextPlayer();
+		
 	}
 	
 	public void stay(Player player) throws InvalidStateException {
@@ -61,6 +63,7 @@ public class GameInProgressState extends State {
 		
 		player.stay();
 		
+		nextPlayer();
 	}
 	
 	/**

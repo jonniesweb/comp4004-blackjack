@@ -50,4 +50,5 @@ public class Player {
 	public boolean isStay() {
 		return stay;
 	}
+	
 }
