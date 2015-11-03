@@ -27,7 +27,7 @@ public abstract class State {
 	}
 	
 	public Player getWaitingForPlayer() throws InvalidStateException {
-		throw new InvalidStateException();
+		return null;
 	}
 	
 	public String newPlayer() throws InvalidStateException {

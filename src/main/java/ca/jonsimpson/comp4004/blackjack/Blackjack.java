@@ -1,5 +1,7 @@
 package ca.jonsimpson.comp4004.blackjack;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class Blackjack {
@@ -79,16 +81,28 @@ public class Blackjack {
 		return deck.takeCard();
 	}
 	
+	/**
+	 * @return a new playerId if the player has joined the game, null if the
+	 *         player must wait for a new game to start
+	 */
 	public String newPlayer() {
 		try {
 			return state.newPlayer();
 			
 		} catch (InvalidStateException e) {
-			e.printStackTrace();
+			return null;
+			// e.printStackTrace();
 		}
 		
-		return null;
-		
+	}
+	
+	public void startGame() {
+		List<Player> playerOrder = getPlayerManager().getPlayerOrder();
+		state = new GameInProgressState(this, playerOrder);
+	}
+
+	public void endGame() {
+		state = new PlayerJoinState(this);
 	}
 	
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Blackjack Admin</title>
+</head>
+<body>
+	<h1>Blackjack Admin</h1>
+	<p>Change Game State</p>
+	<a th:href="@{start}">Play Game</a>
+	<a th:href="@{end}">End Game/player join state</a>
+	
+	<p>Modify game</p>
+	<a th:href="@{reset}">Reset game - only affects cards</a>
+</body>
+</html>

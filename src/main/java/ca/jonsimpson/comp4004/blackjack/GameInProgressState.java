@@ -6,10 +6,10 @@ public class GameInProgressState extends State {
 	
 	private List<Player> playerOrder;
 	private Player currentPlayer;
-	private Blackjack blackjack;
 	
 	public GameInProgressState(Blackjack blackjack, List<Player> playerOrder) {
 		super(blackjack);
+		
 		// validate input
 		if (playerOrder == null) {
 			throw new NullPointerException("playerOrder cannot be null");
@@ -52,7 +52,7 @@ public class GameInProgressState extends State {
 		checkNotBusted(player);
 		checkNotStay(player);
 		
-		player.addCard(blackjack.takeCard());
+		player.addCard(getBlackjack().takeCard());
 		
 	}
 	
