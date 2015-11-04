@@ -1,10 +1,23 @@
 package ca.jonsimpson.comp4004.blackjack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameInProgressState extends State {
 	
+	/**
+	 * All players that are in the game, in proper order
+	 */
 	private List<Player> playerOrder;
+	
+	/**
+	 * Players that are able to play in the next round
+	 */
+	private List<Player> livePlayers;
+	
+	/**
+	 * The current player that the game is waiting for to make a move
+	 */
 	private Player currentPlayer;
 	
 	public GameInProgressState(Blackjack blackjack, List<Player> playerOrder) {
@@ -19,28 +32,30 @@ public class GameInProgressState extends State {
 		
 		this.playerOrder = playerOrder;
 		
+		// initialize the livePlayers list with all the current players
+		livePlayers = new ArrayList<Player>(playerOrder);
+		
 		// set the first player to go
 		currentPlayer = playerOrder.get(0);
 		
 		// give two cards to each player
-		for (int i = 0; i < 2; i++) {
-			for (Player player : playerOrder) {
-				doHit(player);
-			}
+		for (Player player : playerOrder) {
+			doHit(player);
+			doHit(player);
 		}
 		
 	}
 	
 	private void nextPlayer() {
 		// get the current index
-		int index = playerOrder.indexOf(currentPlayer);
+		int index = livePlayers.indexOf(currentPlayer);
 		
 		// get the logical next index, rolling over if larger than the list
 		index++;
-		index %= playerOrder.size();
+		index %= livePlayers.size();
 		
 		// set the next player at the new index
-		currentPlayer = playerOrder.get(index);
+		currentPlayer = livePlayers.get(index);
 	}
 	
 	@Override
@@ -59,19 +74,28 @@ public class GameInProgressState extends State {
 		checkNotBusted(player);
 		checkNotStay(player);
 		
+		
+		// take a card
 		doHit(player);
+		
+		nextPlayer();
+		
+		// if player is busted, remove player
+		try {
+			checkNotBusted(player);
+		} catch (InvalidStateException e) {
+			playerFinished(player);
+		}
 		
 	}
 	
 	/**
-	 * Actually give the player a card. Sets the next player after completed.
+	 * Actually give the player a card
 	 * 
 	 * @param player
 	 */
 	private void doHit(Player player) {
 		player.addCard(getBlackjack().takeCard());
-		
-		nextPlayer();
 	}
 	
 	public void stay(Player player) throws InvalidStateException {
@@ -80,6 +104,20 @@ public class GameInProgressState extends State {
 		player.stay();
 		
 		nextPlayer();
+		
+		// remove the player from the live player list
+		playerFinished(player);
+		
+	}
+	
+	private void playerFinished(Player player) {
+		
+		livePlayers.remove(player);
+		
+		if (livePlayers.isEmpty()) {
+			currentPlayer = null;
+			// TODO: determine which player has won
+		}
 	}
 	
 	/**

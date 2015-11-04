@@ -21,7 +21,7 @@ public class Player {
 	public List<Card> getCards() {
 		return cards;
 	}
-
+	
 	private void clearCards() {
 		cards = new ArrayList<Card>();
 	}
@@ -38,7 +38,7 @@ public class Player {
 	public boolean isBust() {
 		return getCardTotal() > 21;
 	}
-
+	
 	public void stay() {
 		stay = true;
 	}
@@ -47,13 +47,23 @@ public class Player {
 		stay = false;
 		clearCards();
 	}
-
+	
 	public boolean isStay() {
 		return stay;
 	}
 	
 	/**
+	 * Return true if the player shouldn't be able to play in a round.
+	 * 
+	 * @return
+	 */
+	public boolean isRoundFinished() {
+		return isStay() || isBust();
+	}
+	
+	/**
 	 * Get the list of cards viewable by others
+	 * 
 	 * @return
 	 */
 	public List<Card> getPublicCards() {
