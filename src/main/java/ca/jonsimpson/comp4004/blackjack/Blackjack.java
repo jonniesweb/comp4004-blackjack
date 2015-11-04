@@ -100,9 +100,17 @@ public class Blackjack {
 		List<Player> playerOrder = getPlayerManager().getPlayerOrder();
 		state = new GameInProgressState(this, playerOrder);
 	}
-
+	
+	public void finishGame() {
+		state = new GameEndState(this);
+	}
+	
 	public void endGame() {
 		state = new PlayerJoinState(this);
+	}
+
+	public boolean isGameOver() {
+		return state instanceof GameEndState;
 	}
 	
 }

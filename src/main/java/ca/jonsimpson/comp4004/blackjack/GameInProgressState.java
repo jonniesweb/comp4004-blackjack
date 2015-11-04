@@ -116,10 +116,18 @@ public class GameInProgressState extends State {
 		
 		if (livePlayers.isEmpty()) {
 			currentPlayer = null;
-			// TODO: determine which player has won
+			
+			doGameEndState();
 		}
 	}
 	
+	/**
+	 * Called to end the current game and show the winners.
+	 */
+	private void doGameEndState() {
+		getBlackjack().finishGame();
+	}
+
 	/**
 	 * Check that the player isn't stay. Throw an error otherwise.
 	 * 

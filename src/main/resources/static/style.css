@@ -11,3 +11,7 @@
 #player-cards.div {
 	display: default;
 }
+
+.player-info {
+	border: 1px #000000 solid;
+}

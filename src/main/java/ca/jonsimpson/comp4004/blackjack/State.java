@@ -3,7 +3,7 @@ package ca.jonsimpson.comp4004.blackjack;
 public abstract class State {
 	
 	public enum StateType {
-		PLAYER_JOIN, GAME_IN_PROGRESS
+		PLAYER_JOIN, GAME_IN_PROGRESS, GAME_END
 	}
 	
 	private final Blackjack blackjack;

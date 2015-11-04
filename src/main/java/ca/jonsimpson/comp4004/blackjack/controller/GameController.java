@@ -76,6 +76,7 @@ public class GameController {
 		
 		model.addAttribute("id", id);
 		model.addAttribute("status", getGame().getStatus(player));
+		model.addAttribute("gameOver", getGame().isGameOver());
 		model.addAttribute(game);
 		model.addAttribute("player", player);
 		

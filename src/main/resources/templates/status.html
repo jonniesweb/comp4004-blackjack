@@ -20,35 +20,72 @@
     	</form>
     </div>
     
-    <div th:id="action-buttons" th:if="${status} == 'go'">
-    	<form th:action="@{hit}" method="post">
-    		<input th:type="hidden" th:name="id" th:value="${id}"/>
-			<input type="submit" th:value="Hit"/>
-		</form>
-    	
-    	<form th:action="@{stay}" method="post">
-    		<input th:type="hidden" th:name="id" th:value="${id}"/>
-			<input type="submit" th:value="Stay"/>
-		</form>
+    <div th:unless="${gameOver}">
+    	<div th:id="action-buttons" th:if="${status} == 'go'">
+    		<form th:action="@{hit}" method="post">
+    			<input th:type="hidden" th:name="id" th:value="${id}" />
+    			<input type="submit" th:value="Hit" />
+    		</form>
+
+    		<form th:action="@{stay}" method="post">
+    			<input th:type="hidden" th:name="id" th:value="${id}" />
+    			<input type="submit" th:value="Stay" />
+    		</form>
+    	</div>
+
+    	<p>
+    		Your Cards:
+    		<span th:text="${player.cardTotal}"></span>
+    		<span th:if="${player.bust}">Bust</span>
+    	</p>
+    	<div th:each="card : ${player.cards}" id="player-cards">
+    		<div class="card">
+    			<span th:text="${card.rank}">card rank</span>
+    			<br />
+    			<span th:text="${card.suit}">card suit</span>
+    		</div>
+    	</div>
+
+    	<p>Other player's cards</p>
+    	<div th:each="p : ${blackjack.playerManager.allPlayers}" th:unless="${player == p}" class="player-info">
+    		<div th:each="card : ${p.publicCards}" id="player-cards">
+    			<div class="card">
+    				<span th:text="${card.rank}">card rank</span>
+    				<br />
+    				<span th:text="${card.suit}">card suit</span>
+    			</div>
+    		</div>
+    	</div>
     </div>
-        
-    <p>Your Cards: <span th:text="${player.cardTotal}"></span> 
-    	<span th:if="${player.bust}">Bust</span></p>
-    <div th:each="card : ${player.cards}" id="player-cards">
-    	<div class="card">
-			<span th:text="${card.rank}">card rank</span><br/>
-			<span th:text="${card.suit}">card suit</span>
-		</div>
-    </div>
-    
-    <p>Other player's cards</p>
-	<div th:each="p : ${blackjack.playerManager.allPlayers}">
-		<div th:each="card : ${p.publicCards}" id="player-cards" th:unless="${player == p}">
-	    	<div class="card">
-	    		<span th:text="${card.rank}">card rank</span><br/>
-				<span th:text="${card.suit}">card suit</span>
-			</div>
-		</div>
+    <div th:if="${gameOver}">
+    	<p>
+    		Your card total:
+    		<span th:text="${player.cardTotal}"></span>
+    		<span th:if="${player.bust}">Bust</span>
+    	</p>
+    	<div th:each="card : ${player.cards}" id="player-cards">
+    		<div class="card">
+    			<span th:text="${card.rank}">card rank</span>
+    			<br />
+    			<span th:text="${card.suit}">card suit</span>
+    		</div>
+    	</div>
+
+    	<p>Other player's cards</p>
+    	<div th:each="p : ${blackjack.playerManager.allPlayers}" th:unless="${player == p}" class="player-info">
+	    	<p>
+	    		Card total:
+	    		<span th:text="${player.cardTotal}"></span>
+	    		<span th:if="${player.bust}">Bust</span>
+	    	</p>
+    		<div th:each="card : ${p.cards}" id="player-cards">
+    			<div class="card">
+    				<span th:text="${card.rank}">card rank</span>
+    				<br />
+    				<span th:text="${card.suit}">card suit</span>
+    			</div>
+    		</div>
+    	</div>
     </div>
 </body>
 </html>
