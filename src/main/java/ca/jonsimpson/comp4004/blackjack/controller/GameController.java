@@ -96,6 +96,14 @@ public class GameController {
 		
 		return doRedirect(newId);
 	}
+	
+	@RequestMapping("end-game")
+	public String endGame(Model model, @RequestParam String id) {
+		
+		getGame().endGame();
+		
+		return doRedirect(id);
+	}
 
 	private static String doRedirect(String newId) {
 		return "redirect:?id=" + newId;

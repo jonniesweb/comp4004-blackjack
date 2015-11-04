@@ -106,6 +106,7 @@ public class Blackjack {
 	}
 	
 	public void endGame() {
+		newGame();
 		state = new PlayerJoinState(this);
 	}
 

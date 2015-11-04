@@ -18,6 +18,10 @@
     	<form>
 	    	<input type="button" onclick="history.go(0)" th:value="Refresh"/>
     	</form>
+    	<form th:action="@{end-game}" method="post" th:if="${gameOver}">
+    			<input th:type="hidden" th:name="id" th:value="${id}" />
+    			<input type="submit" th:value="'New Game'" />
+    		</form>
     </div>
     
     <div th:unless="${gameOver}">
@@ -75,8 +79,8 @@
     	<div th:each="p : ${blackjack.playerManager.allPlayers}" th:unless="${player == p}" class="player-info">
 	    	<p>
 	    		Card total:
-	    		<span th:text="${player.cardTotal}"></span>
-	    		<span th:if="${player.bust}">Bust</span>
+	    		<span th:text="${p.cardTotal}"></span>
+	    		<span th:if="${p.bust}">Bust</span>
 	    	</p>
     		<div th:each="card : ${p.cards}" id="player-cards">
     			<div class="card">
