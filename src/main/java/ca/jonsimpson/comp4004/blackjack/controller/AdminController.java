@@ -27,13 +27,13 @@ public class AdminController {
 	
 	@RequestMapping("end")
 	public String playerJoin() {
-		blackjack.endGame();
+		blackjack.newGame();
 		return doRedirect();
 	}
 	
 	@RequestMapping("reset")
 	public String resetGame() {
-		blackjack.newGame();
+		blackjack.reset();
 		
 		return doRedirect();
 	}

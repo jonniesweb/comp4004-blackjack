@@ -76,7 +76,7 @@ public class GameController {
 		
 		model.addAttribute("id", id);
 		model.addAttribute("status", getGame().getStatus(player));
-		model.addAttribute("gameOver", getGame().isGameOver());
+		model.addAttribute("gameOver", getGame().isGameOverState());
 		model.addAttribute(game);
 		model.addAttribute("player", player);
 		
@@ -100,7 +100,7 @@ public class GameController {
 	@RequestMapping("end-game")
 	public String endGame(Model model, @RequestParam String id) {
 		
-		getGame().endGame();
+		getGame().newGame();
 		
 		return doRedirect(id);
 	}

@@ -69,7 +69,7 @@ public class Blackjack {
 	 * Remove all the cards from every player and reset the deck to a full 52
 	 * cards.
 	 */
-	public void newGame() {
+	public void reset() {
 		resetDeck();
 		
 		for (Player player : getPlayerManager().getAllPlayers()) {
@@ -96,21 +96,38 @@ public class Blackjack {
 		
 	}
 	
+	/**
+	 * Change the state of the game to the {@link PlayerJoinState}.
+	 */
+	public void newGame() {
+		reset();
+		state = new PlayerJoinState(this);
+	}
+
+	/**
+	 * Change the state of the game to the {@link GameInProgressState} state.
+	 */
 	public void startGame() {
 		List<Player> playerOrder = getPlayerManager().getPlayerOrder();
 		state = new GameInProgressState(this, playerOrder);
 	}
 	
+	/**
+	 * Change the state of the game to the {@link GameEndState}.
+	 */
 	public void finishGame() {
 		state = new GameEndState(this);
 	}
 	
-	public void endGame() {
-		newGame();
-		state = new PlayerJoinState(this);
+	public boolean isPlayerJoinState() {
+		return state instanceof PlayerJoinState;
 	}
 
-	public boolean isGameOver() {
+	public boolean isGameInProgressState() {
+		return state instanceof GameInProgressState;
+	}
+
+	public boolean isGameOverState() {
 		return state instanceof GameEndState;
 	}
 	
