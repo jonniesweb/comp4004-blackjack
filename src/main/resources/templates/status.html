@@ -21,7 +21,11 @@
     	<form th:action="@{end-game}" method="post" th:if="${gameOver}">
     			<input th:type="hidden" th:name="id" th:value="${id}" />
     			<input type="submit" th:value="'New Game'" />
-    		</form>
+    	</form>
+    	<form th:action="@{start-game}" method="post" th:if="${newGame}">
+    			<input th:type="hidden" th:name="id" th:value="${id}" />
+    			<input type="submit" th:value="'Start Game'" />
+    	</form>
     </div>
     
     <div th:unless="${gameOver}">

@@ -77,6 +77,8 @@ public class GameController {
 		model.addAttribute("id", id);
 		model.addAttribute("status", getGame().getStatus(player));
 		model.addAttribute("gameOver", getGame().isGameOverState());
+		model.addAttribute("newGame", getGame().isPlayerJoinState());
+		model.addAttribute("gameInProgress", getGame().isGameInProgressState());
 		model.addAttribute(game);
 		model.addAttribute("player", player);
 		
@@ -101,6 +103,14 @@ public class GameController {
 	public String endGame(Model model, @RequestParam String id) {
 		
 		getGame().newGame();
+		
+		return doRedirect(id);
+	}
+	
+	@RequestMapping("start-game")
+	public String startGame(Model model, @RequestParam String id) {
+		
+		getGame().startGame();
 		
 		return doRedirect(id);
 	}
