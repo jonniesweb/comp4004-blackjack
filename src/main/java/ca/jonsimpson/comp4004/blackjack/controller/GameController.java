@@ -28,10 +28,11 @@ public class GameController {
 	 * @param id
 	 * @return
 	 * @throws UnknownPlayerException
-	 * @throws InvalidStateException 
+	 * @throws InvalidStateException
 	 */
 	@RequestMapping(value = "hit", method = POST)
-	public String hit(Model model, @RequestParam String id) throws UnknownPlayerException, InvalidStateException {
+	public String hit(Model model, @RequestParam String id) throws UnknownPlayerException,
+			InvalidStateException {
 		try {
 			getGame().hit(getPlayer(id));
 		} catch (UnknownPlayerException e) {
@@ -48,10 +49,11 @@ public class GameController {
 	 * @param id
 	 * @return
 	 * @throws UnknownPlayerException
-	 * @throws InvalidStateException 
+	 * @throws InvalidStateException
 	 */
 	@RequestMapping(value = "stay", method = POST)
-	public String stay(Model model, @RequestParam String id) throws UnknownPlayerException, InvalidStateException {
+	public String stay(Model model, @RequestParam String id) throws UnknownPlayerException,
+			InvalidStateException {
 		try {
 			getGame().stay(getPlayer(id));
 		} catch (UnknownPlayerException e) {
@@ -60,13 +62,14 @@ public class GameController {
 		model.addAttribute("id", id);
 		return doRedirect(id);
 	}
-
+	
 	private String getNewPlayerRedirect() {
 		return "redirect:new";
 	}
 	
 	@RequestMapping(method = GET)
-	public String getStatus(Model model, @RequestParam(required=false) String id) throws UnknownPlayerException {
+	public String getStatus(Model model, @RequestParam(required = false) String id)
+			throws UnknownPlayerException {
 		Player player;
 		try {
 			player = getPlayer(id);
@@ -114,11 +117,10 @@ public class GameController {
 		
 		return doRedirect(id);
 	}
-
+	
 	private static String doRedirect(String newId) {
 		return "redirect:?id=" + newId;
 	}
-	
 	
 	private Player getPlayer(String id) throws UnknownPlayerException {
 		return game.getPlayerManager().getPlayer(id);
