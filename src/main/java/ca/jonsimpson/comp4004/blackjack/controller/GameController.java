@@ -15,7 +15,7 @@ import ca.jonsimpson.comp4004.blackjack.Player;
 import ca.jonsimpson.comp4004.blackjack.UnknownPlayerException;
 
 @Controller
-@RequestMapping("/game")
+@RequestMapping("")
 public class GameController {
 	
 	@Autowired
