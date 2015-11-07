@@ -20,6 +20,10 @@ public class SeleniumTest {
 	private boolean acceptNextAlert = true;
 	private StringBuffer verificationErrors = new StringBuffer();
 	
+	/**
+	 * Setup the Firefox driver
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		driver = new FirefoxDriver();
@@ -37,7 +41,8 @@ public class SeleniumTest {
 	}
 	
 	/**
-	 * Check that the same information is on the page when refreshing
+	 * Verify that the player join page has all of the important information, as
+	 * well as testing that the refresh button displays the same information.
 	 * 
 	 * @throws Exception
 	 */
@@ -73,6 +78,13 @@ public class SeleniumTest {
 		return refreshButton.getAttribute("value");
 	}
 	
+	/**
+	 * Check that when the user plays a single player game that all of the
+	 * important information is displayed for them. Also verify that they're
+	 * able to play and end the game.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testBeginGame() throws Exception {
 		driver.get(baseUrl + "/");
@@ -116,6 +128,7 @@ public class SeleniumTest {
 	/**
 	 * When a game is already in progress, show the game in progress screen,
 	 * allowing the user to refresh the page to wait for the game to be over.
+	 * End the game and then verify that the user is able to join the new game.
 	 * 
 	 * @throws Exception
 	 */
@@ -124,45 +137,51 @@ public class SeleniumTest {
 		driver.get(baseUrl + "/");
 		
 		// start a new game
-	    driver.findElement(By.id("start-game-button")).click();
-	    
-	    // go back to the home page
-	    driver.get(baseUrl + "/");
-	    
-	    // check that the game in progress page is displaying
-	    assertEquals("Game in progress", driver.findElement(By.cssSelector("h2")).getText());
-	    
-	    // check that the refresh button exists
-	    assertTrue(isElementPresent(By.cssSelector("input[type=\"button\"]")));
-	    
-	    // check that the refresh button has the text Refresh
-	    assertEquals("Refresh", driver.findElement(By.cssSelector("input[type=\"button\"]")).getAttribute("value"));
-	    
-	    // refresh the page
-	    driver.findElement(By.cssSelector("input[type=\"button\"]")).click();
-	    
-	    // check all of the above again
-	    // check that the game in progress page is displaying
-	    assertEquals("Game in progress", driver.findElement(By.cssSelector("h2")).getText());
-	    
-	    // check that the refresh button exists
-	    assertTrue(isElementPresent(By.cssSelector("input[type=\"button\"]")));
-	    
-	    // check that the refresh button has the text Refresh
-	    assertEquals("Refresh", driver.findElement(By.cssSelector("input[type=\"button\"]")).getAttribute("value"));
-	    
-	    // stop the game
-	    reset();
-	    
-	    // refresh the page
-	    driver.findElement(By.cssSelector("input[type=\"button\"]")).click();
-	    
-	    // check that the game is over by checking the start game button exists
-	    assertTrue(isElementPresent(By.id("start-game-button")));
-
-	    
+		driver.findElement(By.id("start-game-button")).click();
+		
+		// go back to the home page
+		driver.get(baseUrl + "/");
+		
+		// check that the game in progress page is displaying
+		assertEquals("Game in progress", driver.findElement(By.cssSelector("h2")).getText());
+		
+		// check that the refresh button exists
+		assertTrue(isElementPresent(By.cssSelector("input[type=\"button\"]")));
+		
+		// check that the refresh button has the text Refresh
+		assertEquals("Refresh", driver.findElement(By.cssSelector("input[type=\"button\"]"))
+				.getAttribute("value"));
+		
+		// refresh the page
+		driver.findElement(By.cssSelector("input[type=\"button\"]")).click();
+		
+		// check all of the above again
+		// check that the game in progress page is displaying
+		assertEquals("Game in progress", driver.findElement(By.cssSelector("h2")).getText());
+		
+		// check that the refresh button exists
+		assertTrue(isElementPresent(By.cssSelector("input[type=\"button\"]")));
+		
+		// check that the refresh button has the text Refresh
+		assertEquals("Refresh", driver.findElement(By.cssSelector("input[type=\"button\"]"))
+				.getAttribute("value"));
+		
+		// stop the game
+		reset();
+		
+		// refresh the page
+		driver.findElement(By.cssSelector("input[type=\"button\"]")).click();
+		
+		// check that the game is over and the player can join the game by
+		// checking the start game button exists
+		assertTrue(isElementPresent(By.id("start-game-button")));
+		
 	}
 	
+	/**
+	 * Tear down the Firefox driver, fail the test if any errors occur
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		driver.quit();
