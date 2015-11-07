@@ -34,6 +34,7 @@ public class AdminController {
 	@RequestMapping("reset")
 	public String resetGame() {
 		blackjack.reset();
+		blackjack.newGame();
 		
 		return doRedirect();
 	}

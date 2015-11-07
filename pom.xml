@@ -15,18 +15,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-<!-- 				<dependencies>
-					<dependency>
-						<groupId>org.springframework</groupId>
-						<artifactId>springloaded</artifactId>
-						<version>1.2.3.RELEASE</version>
-					</dependency>
-					<dependency>
-						<groupId>org.springframework.boot</groupId>
-						<artifactId>spring-boot-starter-data-rest</artifactId>
-						<version>1.2.4.RELEASE</version>
-					</dependency>
-				</dependencies> -->
+				<!-- <dependencies> <dependency> <groupId>org.springframework</groupId> 
+					<artifactId>springloaded</artifactId> <version>1.2.3.RELEASE</version> </dependency> 
+					<dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-rest</artifactId> 
+					<version>1.2.4.RELEASE</version> </dependency> </dependencies> -->
 			</plugin>
 		</plugins>
 	</build>
@@ -48,6 +40,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-firefox-driver</artifactId>
+			<version>2.48.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<properties>
