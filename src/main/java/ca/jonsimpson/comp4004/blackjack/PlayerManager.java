@@ -51,5 +51,10 @@ public class PlayerManager {
 	public List<Player> getPlayerOrder() {
 		return playerOrder;
 	}
+	
+	public void removeAllPlayers() {
+		players = new HashMap<String, Player>();
+		playerOrder = new ArrayList<Player>();
+	}
 
 }

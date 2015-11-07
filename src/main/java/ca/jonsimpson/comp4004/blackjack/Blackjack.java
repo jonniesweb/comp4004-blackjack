@@ -72,9 +72,10 @@ public class Blackjack {
 	public void reset() {
 		resetDeck();
 		
-		for (Player player : getPlayerManager().getAllPlayers()) {
-			player.reset();
-		}
+		getPlayerManager().removeAllPlayers();
+//		for (Player player : getPlayerManager().getAllPlayers()) {
+//			player.reset();
+//		}
 	}
 	
 	public Card takeCard() {
