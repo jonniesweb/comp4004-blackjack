@@ -15,7 +15,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<dependencies>
+<!-- 				<dependencies>
 					<dependency>
 						<groupId>org.springframework</groupId>
 						<artifactId>springloaded</artifactId>
@@ -26,7 +26,7 @@
 						<artifactId>spring-boot-starter-data-rest</artifactId>
 						<version>1.2.4.RELEASE</version>
 					</dependency>
-				</dependencies>
+				</dependencies> -->
 			</plugin>
 		</plugins>
 	</build>
@@ -41,12 +41,18 @@
 			<version>1.2</version>
 		</dependency>
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<properties>
 		<java.version>1.7</java.version>
 		<start-class>ca.jonsimpson.comp4004.blackjack.Application</start-class>
 	</properties>
+	<packaging>war</packaging>
 </project>
