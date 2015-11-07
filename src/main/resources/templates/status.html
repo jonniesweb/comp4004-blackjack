@@ -8,11 +8,6 @@
 </head>
 <body>
 	<p>Current number of players: <span th:text="${blackjack.playerManager.size}">100</span></p>
-    <p th:switch="${status}" th:if="${gameInProgress}">Status: 
-    	<span th:case="'waiting'">Waiting for another player to go</span>
-    	<span th:case="go">It is your turn</span>
-    	<span th:case="*">Unknown status</span>
-    </p>
     
     <div th:id="action-buttons" th:if="${status} == 'waiting'">
     	<form>
@@ -27,7 +22,24 @@
     			<input type="submit" th:value="'Start Game'" />
     	</form>
     </div>
+    	<div th:id="action-buttons" th:if="${status} == 'go' and ${gameInProgress}">
+    		<form th:action="@{hit}" method="post">
+    			<input th:type="hidden" th:name="id" th:value="${id}" />
+    			<input type="submit" th:value="Hit" />
+    		</form>
 
+    		<form th:action="@{stay}" method="post">
+    			<input th:type="hidden" th:name="id" th:value="${id}" />
+    			<input type="submit" th:value="Stay" />
+    		</form>
+    	</div>
+
+    <p th:switch="${status}" th:if="${gameInProgress}">Status: 
+    	<span th:case="'waiting'">Waiting for another player to go</span>
+    	<span th:case="go">It is your turn</span>
+    	<span th:case="*">Unknown status</span>
+    </p>
+    
     <div th:if="${gameOver} or ${gameInProgress}">
     	<p>
     		Your card total:
@@ -44,17 +56,6 @@
     </div>
 
     <div th:unless="${gameOver}">
-    	<div th:id="action-buttons" th:if="${status} == 'go'">
-    		<form th:action="@{hit}" method="post">
-    			<input th:type="hidden" th:name="id" th:value="${id}" />
-    			<input type="submit" th:value="Hit" />
-    		</form>
-
-    		<form th:action="@{stay}" method="post">
-    			<input th:type="hidden" th:name="id" th:value="${id}" />
-    			<input type="submit" th:value="Stay" />
-    		</form>
-    	</div>
 
 
     	<p>Other player's cards</p>
