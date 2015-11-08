@@ -4,11 +4,11 @@
 	display: inline-block;
 }
 
-#player-cards {
+.player-cards {
 	display: inline-block;
 }
 
-#player-cards.div {
+.player-cards.div {
 	display: default;
 }
 

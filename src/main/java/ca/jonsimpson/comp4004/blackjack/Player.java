@@ -9,6 +9,7 @@ public class Player {
 	private final String id;
 	private List<Card> cards = new ArrayList<Card>();
 	private boolean stay = false;
+	private Boolean winner;
 	
 	public Player(String id) {
 		this.id = id;
@@ -74,5 +75,17 @@ public class Player {
 		} else {
 			return Collections.EMPTY_LIST;
 		}
+	}
+
+	public void setLoser() {
+		winner = false;
+	}
+
+	public void setWinner() {
+		winner = true;
+	}
+	
+	public boolean isWinner() {
+		return winner;
 	}
 }

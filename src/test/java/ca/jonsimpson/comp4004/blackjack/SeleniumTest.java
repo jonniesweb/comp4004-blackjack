@@ -15,20 +15,26 @@ import org.junit.Test;
 
 public class SeleniumTest {
 	
-	private WebDriver driver;
-	private String baseUrl;
+	private static WebDriver driver;
+	private static String baseUrl;
 	private boolean acceptNextAlert = true;
 	private StringBuffer verificationErrors = new StringBuffer();
 	
+	@BeforeClass
+	public static void beforeClass() {
+		driver = new FirefoxDriver();
+		baseUrl = "http://localhost:8080/";
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		
+	}
+	
 	/**
 	 * Setup the Firefox driver
+	 * 
 	 * @throws Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		driver = new FirefoxDriver();
-		baseUrl = "http://localhost:8080/";
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
 		reset();
 	}
@@ -90,7 +96,7 @@ public class SeleniumTest {
 		driver.get(baseUrl + "/");
 		
 		// start a single player game
-		driver.findElement(By.id("new-game-button")).click();
+		driver.findElement(By.id("start-game-button")).click();
 		
 		// check that one player is playing
 		assertEquals("1", driver.findElement(By.id("numPlayers")).getText());
@@ -100,8 +106,8 @@ public class SeleniumTest {
 				.matcher(driver.findElement(By.id("yourCardTotal")).getText()).find());
 		
 		// check that the player is given two cards
-		assertTrue(isElementPresent(By.xpath("//div[@id='player-cards']/div")));
-		assertTrue(isElementPresent(By.xpath("(//div[@id='player-cards']/div)[2]")));
+		assertTrue(isElementPresent(By.cssSelector("div.card")));
+		assertTrue(isElementPresent(By.xpath("//div[@id='player-section']/div[2]/div")));
 		
 		// check that the rank is there
 		assertTrue(Pattern.compile(".[a-zA-Z]+")
@@ -146,31 +152,31 @@ public class SeleniumTest {
 		assertEquals("Game in progress", driver.findElement(By.cssSelector("h2")).getText());
 		
 		// check that the refresh button exists
-		assertTrue(isElementPresent(By.cssSelector("input[type=\"button\"]")));
+		assertTrue(isElementPresent(By.id("refresh-button")));
 		
 		// check that the refresh button has the text Refresh
-		assertEquals("Refresh", driver.findElement(By.cssSelector("input[type=\"button\"]"))
-				.getAttribute("value"));
+		assertEquals("Refresh", driver.findElement(By.id("refresh-button")).getAttribute("value"));
 		
 		// refresh the page
-		driver.findElement(By.cssSelector("input[type=\"button\"]")).click();
+		driver.findElement(By.id("refresh-button")).click();
 		
 		// check all of the above again
 		// check that the game in progress page is displaying
 		assertEquals("Game in progress", driver.findElement(By.cssSelector("h2")).getText());
 		
 		// check that the refresh button exists
-		assertTrue(isElementPresent(By.cssSelector("input[type=\"button\"]")));
+		assertTrue(isElementPresent(By.id("refresh-button")));
 		
 		// check that the refresh button has the text Refresh
-		assertEquals("Refresh", driver.findElement(By.cssSelector("input[type=\"button\"]"))
-				.getAttribute("value"));
+		assertEquals("Refresh", driver.findElement(By.id("refresh-button")).getAttribute("value"));
 		
 		// stop the game
 		reset();
 		
+		driver.get(baseUrl + "/");
+		
 		// refresh the page
-		driver.findElement(By.cssSelector("input[type=\"button\"]")).click();
+		driver.findElement(By.id("refresh-button")).click();
 		
 		// check that the game is over and the player can join the game by
 		// checking the start game button exists
@@ -180,15 +186,20 @@ public class SeleniumTest {
 	
 	/**
 	 * Tear down the Firefox driver, fail the test if any errors occur
+	 * 
 	 * @throws Exception
 	 */
 	@After
 	public void tearDown() throws Exception {
-		driver.quit();
 		String verificationErrorString = verificationErrors.toString();
 		if (!"".equals(verificationErrorString)) {
 			fail(verificationErrorString);
 		}
+	}
+	
+	@AfterClass
+	public static void afterClass() {
+		driver.quit();
 	}
 	
 	private boolean isElementPresent(By by) {
