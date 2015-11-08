@@ -184,6 +184,66 @@ public class SeleniumTest {
 		
 	}
 	
+	@Test
+	public void testMultiplePlayersPlaying() throws Exception {
+		driver.get(baseUrl + "/");
+		
+		String player1 = driver.getCurrentUrl();
+		
+		driver.get(baseUrl + "/");
+		
+		String player2 = driver.getCurrentUrl();
+		
+		
+		driver.findElement(By.id("start-game-button")).click();
+	    assertEquals("Waiting for another player to go", driver.findElement(By.xpath("//p[2]/span")).getText());
+	    assertEquals("2", driver.findElement(By.id("numPlayers")).getText());
+	    assertTrue(isElementPresent(By.cssSelector("div.player-info")));
+	    assertTrue(isElementPresent(By.cssSelector("div.player-info > div.player-cards > div.card > span.rank")));
+	    assertTrue(isElementPresent(By.cssSelector("div.player-info > div.player-cards > div.card > span.suit")));
+	    assertFalse(isElementPresent(By.id("hit-button")));
+	    assertFalse(isElementPresent(By.id("stay-button")));
+	    
+	    // switch to p1
+	    driver.get(player1);
+	    
+	    assertEquals("It is your turn", driver.findElement(By.xpath("//p[2]/span")).getText());
+	    assertTrue(isElementPresent(By.id("hit-button")));
+	    assertTrue(isElementPresent(By.id("stay-button")));
+	    assertTrue(isElementPresent(By.cssSelector("div.player-info")));
+	    assertTrue(isElementPresent(By.cssSelector("div.player-info > div.player-cards > div.card > span.rank")));
+	    assertTrue(isElementPresent(By.cssSelector("div.player-info > div.player-cards > div.card > span.suit")));
+	    assertEquals("2", driver.findElement(By.id("numPlayers")).getText());
+	    assertFalse(isElementPresent(By.xpath("//div[@class='player-info']/div[2]/div")));
+	    
+	    driver.findElement(By.id("stay-button")).click();
+	    
+	    assertEquals("Waiting for another player to go", driver.findElement(By.xpath("//p[2]/span")).getText());
+	    assertFalse(isElementPresent(By.id("hit-button")));
+	    assertFalse(isElementPresent(By.id("stay-button")));
+	    
+	    // switch to player 2
+	    driver.get(player2);
+	    
+	    assertEquals("It is your turn", driver.findElement(By.xpath("//p[2]/span")).getText());
+	    assertTrue(isElementPresent(By.id("hit-button")));
+	    assertTrue(isElementPresent(By.id("stay-button")));
+	    
+	    driver.findElement(By.id("stay-button")).click();
+	    
+	    assertTrue(isElementPresent(By.id("new-game-button")));
+	    assertTrue(isElementPresent(By.xpath("//div[@id='player-section']/p/span[2]")));
+	    assertTrue(isElementPresent(By.xpath("//div/div/p/span[2]")));
+	    
+	    // switch to player 1
+	    driver.get(player1);
+	    
+	    assertTrue(isElementPresent(By.id("new-game-button")));
+	    assertTrue(isElementPresent(By.xpath("//div[@id='player-section']/p/span[2]")));
+	    assertTrue(isElementPresent(By.xpath("//div/div/p/span[2]")));
+
+	}
+	
 	/**
 	 * Tear down the Firefox driver, fail the test if any errors occur
 	 * 
