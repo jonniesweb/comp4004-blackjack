@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>selenium4</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">selenium4</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=start-game-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//p[2]/span</td>
+	<td>Waiting for another player to go</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=numPlayers</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=div.player-info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=div.player-info &gt; div.player-cards &gt; div.card &gt; span.rank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=div.player-info &gt; div.player-cards &gt; div.card &gt; span.suit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=hit-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=stay-button</td>
+	<td></td>
+</tr>
+<!--switch to p1-->
+<tr>
+	<td>assertText</td>
+	<td>//p[2]/span</td>
+	<td>It is your turn</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=hit-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=stay-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=div.player-info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=div.player-info &gt; div.player-cards &gt; div.card &gt; span.rank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=div.player-info &gt; div.player-cards &gt; div.card &gt; span.suit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=numPlayers</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//div[@class='player-info']/div[2]/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=stay-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//p[2]/span</td>
+	<td>Waiting for another player to go</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=hit-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=stay-button</td>
+	<td></td>
+</tr>
+<!--switch to player 2-->
+<tr>
+	<td>assertText</td>
+	<td>//p[2]/span</td>
+	<td>It is your turn</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=hit-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=stay-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=stay-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=new-game-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='player-section']/p/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div/div/p/span[2]</td>
+	<td></td>
+</tr>
+<!--switch to player 1-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=new-game-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='player-section']/p/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div/div/p/span[2]</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
