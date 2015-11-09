@@ -1,4 +1,10 @@
 
+## Running the Selenium Tests
+
+From Eclipse Package View: right click on SeleniumTestSuite.java -> Run as... -> Junit Test.
+Requires Firefox.
+
+
 ## Requirements
 
 - REQ-#1 User is able to join game
