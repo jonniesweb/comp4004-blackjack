@@ -22,7 +22,8 @@ public class GameEndState extends State {
 		
 		TreeSet<PlayerResult> playerResults = new TreeSet<PlayerResult>();
 		
-		// create a PlayerResult object for each player and add it to the playerResults
+		// create a PlayerResult object for each player and add it to the
+		// playerResults
 		for (Player p : getBlackjack().getPlayerManager().getAllPlayers()) {
 			
 			PlayerResult playerResult = new PlayerResult();
@@ -40,7 +41,6 @@ public class GameEndState extends State {
 		highestScorePlayer.setWinner();
 		winners.add(highestScorePlayer);
 		
-		
 		while (iterator.hasNext()) {
 			GameEndState.PlayerResult playerResult = (GameEndState.PlayerResult) iterator.next();
 			
@@ -49,6 +49,14 @@ public class GameEndState extends State {
 				playerResult.player.setWinner();
 			} else {
 				playerResult.player.setLoser();
+			}
+		}
+		
+		// set any bust players
+		for (PlayerResult playerResult : playerResults) {
+			if (playerResult.player.isBust()) {
+				playerResult.player.setLoser();
+				
 			}
 		}
 	}
