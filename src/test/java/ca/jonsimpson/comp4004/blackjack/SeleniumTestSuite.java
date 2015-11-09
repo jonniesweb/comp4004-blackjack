@@ -10,6 +10,11 @@ import org.junit.runner.notification.Failure;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import ca.jonsimpson.comp4004.blackjack.selenium.GameAlreadyInProgressTest;
+import ca.jonsimpson.comp4004.blackjack.selenium.MultiplePlayerGameTest;
+import ca.jonsimpson.comp4004.blackjack.selenium.PlayerJoinPageTest;
+import ca.jonsimpson.comp4004.blackjack.selenium.SinglePlayerGameTest;
+
 import com.google.common.io.Files;
 
 /**

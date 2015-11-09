@@ -1,4 +1,4 @@
-package ca.jonsimpson.comp4004.blackjack;
+package ca.jonsimpson.comp4004.blackjack.selenium;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
