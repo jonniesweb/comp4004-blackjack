@@ -24,7 +24,6 @@ Feature: Game Setup
     Then the game should start
     
   Scenario: Players start off with two cards each
-    Given a player has joined the game
-    When the game is started
+    Given a game is in progress
     Then the player should have 2 cards
     

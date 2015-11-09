@@ -46,7 +46,7 @@ public class GameInProgressState extends State {
 		
 	}
 	
-	private void nextPlayer() {
+	void nextPlayer() {
 		// get the current index
 		int index = livePlayers.indexOf(currentPlayer);
 		
@@ -150,6 +150,10 @@ public class GameInProgressState extends State {
 		if (player.isBust()) {
 			throw new InvalidStateException("player is bust");
 		}
+	}
+
+	public void setCurrentPlayer(Player player) {
+		currentPlayer = player;
 	}
 	
 }

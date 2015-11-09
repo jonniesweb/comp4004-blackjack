@@ -5,9 +5,9 @@ Feature: Multiplayer Gameplay
     And the game is started
 
   Scenario: Users play in sequential order
-    Given player 1 is the first player
+    Given it is player 1's turn
     When player 1 finishes their turn
-    Then player 2 starts their turn
+    Then it is player 2s turn
     
   Scenario Outline: Player cannot hit or stay go when it is another player's turn
     Given it is player 1's turn

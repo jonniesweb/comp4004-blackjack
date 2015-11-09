@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class Blackjack {
 	
-	private static final String STATUS_GO = "go";
-	private static final String STATUS_WAITING = "waiting";
+	public static final String STATUS_GO = "go";
+	public static final String STATUS_WAITING = "waiting";
 	
 	@Autowired
 	private PlayerManager playerManager;
@@ -22,12 +22,20 @@ public class Blackjack {
 	}
 	
 	public void hit(Player player) throws InvalidStateException {
-		state.hit(player);
+		if (waitingFor(player)) {
+			state.hit(player);
+		} else {
+			throw new InvalidStateException();
+		}
 		
 	}
 	
 	public void stay(Player player) throws InvalidStateException {
-		state.stay(player);
+		if (waitingFor(player)) {
+			state.stay(player);
+		} else {
+			throw new InvalidStateException();
+		}
 		
 	}
 	
@@ -130,6 +138,33 @@ public class Blackjack {
 
 	public boolean isGameOverState() {
 		return state instanceof GameEndState;
+	}
+	
+	/**
+	 * For testing only
+	 * @param player
+	 * @throws InvalidStateException
+	 */
+	public void setCurrentPlayer(Player player) throws InvalidStateException {
+		if (isGameInProgressState()) {
+			GameInProgressState state = (GameInProgressState) this.state;
+			state.setCurrentPlayer(player);
+		} else {
+			throw new InvalidStateException();
+		}
+	}
+	
+	/**
+	 * For testing only
+	 * @throws InvalidStateException
+	 */
+	public void nextPlayersTurn() throws InvalidStateException {
+		if (isGameInProgressState()) {
+			GameInProgressState state = (GameInProgressState) this.state;
+			state.nextPlayer();
+		} else {
+			throw new InvalidStateException();
+		}
 	}
 	
 }
