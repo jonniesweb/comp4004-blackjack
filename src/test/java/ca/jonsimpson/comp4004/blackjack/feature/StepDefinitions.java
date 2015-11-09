@@ -20,7 +20,9 @@ import static org.junit.Assert.*;
 public class StepDefinitions {
 	
 	@Autowired
-	Blackjack blackjack;
+	private Blackjack blackjack;
+	
+	private String gameInProgressPlayerId;
 	
 	@Given("the game is not running")
 	public void the_game_is_not_running() {
@@ -37,5 +39,37 @@ public class StepDefinitions {
 	@Then("^the number of players should be (\\d+)$")
 	public void the_number_of_players_should_be(int players) throws Throwable {
 		assertThat(blackjack.getPlayerManager().getSize(), is(players));
+	}
+	
+	@Given("^a game is in progress$")
+	public void a_game_is_in_progress() throws Throwable {
+	    blackjack.newPlayer();
+	    blackjack.startGame();
+	}
+
+	@When("^a player attempts to join the game$")
+	public void a_player_attempts_to_join_the_game() throws Throwable {
+		gameInProgressPlayerId = blackjack.newPlayer();
+	}
+
+	@Then("^the player is unable to join the game$")
+	public void the_player_is_unable_to_join_the_game() throws Throwable {
+		assertNull(gameInProgressPlayerId);
+		assertThat(blackjack.getPlayerManager().getSize(), is(1));
+	}
+
+	@Given("^a player has joined the game$")
+	public void a_player_has_joined_the_game() throws Throwable {
+		blackjack.newPlayer();
+	}
+
+	@When("^the player starts the game$")
+	public void the_player_starts_the_game() throws Throwable {
+	    blackjack.startGame();
+	}
+
+	@Then("^the game should start$")
+	public void the_game_should_start() throws Throwable {
+		assertTrue(blackjack.isGameInProgressState());
 	}
 }
