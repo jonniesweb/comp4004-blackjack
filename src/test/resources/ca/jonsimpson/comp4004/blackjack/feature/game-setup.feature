@@ -1,4 +1,4 @@
-Feature: Gameplay
+Feature: Game Setup
 
 
 
@@ -23,4 +23,8 @@ Feature: Gameplay
     When the player starts the game
     Then the game should start
     
-  
+  Scenario: Players start off with two cards each
+    Given a player has joined the game
+    When the game is started
+    Then the player should have 2 cards
+    
