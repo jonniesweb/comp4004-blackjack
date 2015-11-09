@@ -1,4 +1,4 @@
-package ca.jonsimpson.comp4004.blackjack.feature;
+package ca.jonsimpson.comp4004.blackjack.cucumber;
 
 import java.util.List;
 
